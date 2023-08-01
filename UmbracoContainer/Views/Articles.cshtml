@@ -1,0 +1,96 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Articles>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+		<!-- Main container -->
+		<div class="container">
+
+			<!-- Featured articlepost -->
+			<div class="row section">
+				<div class="col-md-12">
+				    @{
+				        IPublishedContent featureStory = Model.Value<IPublishedContent>("featureStory");
+				        if (featureStory != null)
+				        { 
+					        <a href="@featureStory.Url()" class="featured-link"><div class="featured-article">
+					            @{
+					                var featureImage = featureStory.Value<IPublishedContent>("thumbnailImage");
+					            }
+						        <div class="image-box" style="background-image:url('@featureImage.Url()')"></div>
+    						        <h2>@featureStory,Value("titleText")</h2>
+    						        <p>
+    						        THESE 
+            						    @{
+            						        int maxLength = 200;
+            						        string articleBody = featureStory.Value("articleText").ToString();
+            						        if (articleBody.Length > 200)
+            						        {
+            						            articleBody.Substring(0, 200);
+        						            }
+        						            else
+        						            {
+        						                featureStory.Value("articleText");
+    						                }
+            						    }...
+    						        </p>
+    						        <a href="@featureStory.Url()" class="btn btn-primary">Read more >></a>
+					            </div>
+				            </a>
+					    }
+					}
+				</div>
+			</div>
+
+			<!-- Latest article posts -->
+			<div class="row section">
+				<div class="col-md-12">
+					<h3>Latest stories</h3>
+				</div>
+			</div>
+
+			<!-- Article Post Query goes here. -->
+			<div class="row">
+				<div class="col-md-4">
+					<a href="Articlepost.html" class="featured-link"><div class="thumbnail-article">
+						<div class="thumbnail-img" style="background-image:url('/images/Press.jpg')"></div>
+						<h5>Umbraco <3 YouTube</h5>
+					</div></a>
+				</div>
+				<div class="col-md-4">
+					<a href="#" class="featured-link"><div class="thumbnail-article">
+						<div class="thumbnail-img" style="background-image:url('/images/sofie-hammock.jpg')"></div>
+						<h5>A day in a Documentation Curators life</h5>
+					</div></a>
+				</div>
+				<div class="col-md-4">
+					<a href="#" class="featured-link"><div class="thumbnail-article">
+						<div class="thumbnail-img" style="background-image:url('/images/heart-DNS.png')"></div>
+						<h5>New product: Umbraco Heartcore</h5>
+					</div></a>
+				</div>
+
+				<div class="col-md-4">
+					<a href="#" class="featured-link"><div class="thumbnail-article">
+						<div class="thumbnail-img" style="background-image:url('/images/uPackage.png')"></div>
+						<h5>Packages.. Packages every where!</h5>
+					</div></a>
+				</div>
+				<div class="col-md-4">
+					<a href="#" class="featured-link"><div class="thumbnail-article">
+						<div class="thumbnail-img" style="background-image:url('/images/CG-virgins.JPG')"></div>
+						<h5>Just how flexible is Umbraco?</h5>
+					</div></a>
+				</div>
+				<div class="col-md-4">
+					<a href="#" class="featured-link"><div class="thumbnail-article">
+						<div class="thumbnail-img" style="background-image:url('/images/confetti.jpg')"></div>
+						<h5>Festival season of 2020</h5>
+					</div></a>
+				</div>
+			</div>
+
+		</div>
+		

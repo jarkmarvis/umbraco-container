@@ -1,0 +1,68 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Article>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+		<!-- Main container -->
+
+		<!-- Article meta data -->
+		<div class="container-fluid grey-bg">
+			<div class="container">
+				<div class="row section">
+					<div class="col-md-6">
+						<div class="meta-author media p-3">
+							<img src="images/SofieToft.jpg" alt="Sofie Toft" class="mr-3 mt-2" style="width:60px;">
+							<div class="media-body">
+								<p><span class="font-weight-bold">Written by: </span> @Model.Value("author")</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="meta-meta text-right">
+							<p><br /> 
+								<span class="font-weight-bold">Published on: </span> @Model.Value("publishedOn").ToString("MMMM dd, yyyy") <br />
+								<span class="font-weight-bold">Category:</span> <a href="#">
+								    @if(Model.Categories.Any())
+								    {
+								        @foreach(var tag in Model.Categories)
+								        {
+								            <span>@tag </span>
+								        }
+							        }
+								</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+
+		<!-- Article content -->
+        <div class="container">
+
+			<div class="row section">
+				<div class="col-md-12">
+					@Model.Value("articleText")
+				</div>
+			</div>
+		</div>
+
+		<!-- Related story -->
+		<div class="container-fluid orange-bg">
+			<div class="container">
+				<div class="row section">
+					<div class="col-md-12 article-related">
+						<h4>Related story:</h4>
+						<a href="#">
+							<h5>Product Update: Highlights of 2019</h5>
+							<p>‘Tis the season to be jolly, launch new products, release new features and plan for next year. 
+								Don’t worry, I’m not going to sing it for you, but I’ll take you through recent product news and give you some insight as to what you can expect in December - 
+								and the beginning of 2020.<br />
+								<span class="font-italic">Written by Sofie Toft</span></p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		

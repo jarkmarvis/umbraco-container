@@ -1,0 +1,45 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using HealthTechSolutions.ContentModels;
+
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPageSettings>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>My Company Inc. | @Model.Value("pageName")</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="/scripts/ReactiveTemplateController.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    @await Html.PartialAsync("MainNav")
+    <!-- End Navigation -->
+    <main class="container">
+        <!-- Jumbotron, w title -->
+        <div class="jumbotron text-center jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-1">@Model.Value("title", fallback: Fallback.ToAncestors)</h1>
+                <p>@Model.Value("subtitle", fallback: Fallback.ToAncestors)</p>
+            </div>
+        </div>
+        <!-- Jumbotron, w title -->
+        <!-- Main Content -->
+        <section id="main" class="wrapper">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </section>
+    </main>
+    
+    @await Html.PartialAsync("Footer/SiteFooter")
+
+</body>
+</html>

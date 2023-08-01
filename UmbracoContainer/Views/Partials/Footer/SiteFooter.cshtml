@@ -1,0 +1,144 @@
+﻿@using HealthTechSolutions.ContentModels;
+@using Umbraco.Cms.Core.Models;
+
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPageSettings>
+@{
+    Layout = null;
+
+    //var siteFooter = Umbraco.ContentAtRoot().FirstOrDefault().ChildrenOfType("siteFooter").FirstOrDefault() as SiteFooter;
+
+    // @(await Component.InvokeAsync("FooterView", new { siteFooter = siteFooter }))
+}
+
+<div class="container text-center footer">
+    @if (Model != null)
+    {
+        <!--- Top Section Links (Optional) --->
+        if (Model.FooterDisplayTR)
+        {
+            <div class="row">
+                <ul>
+                    @{
+                        foreach (var link in Model.TopRowLinks)
+                        {
+                            <li>
+                                <a href="@(link.Url)" target="@(link.Target)">@(link.Name)</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+        <!--- Middle Row Up To 3 Columns --->
+        int middleRowColumnsCount = 0;
+        if (Model.FooterDisplayMrlc)
+        {
+            middleRowColumnsCount++;
+        }
+        if (Model.FooterDisplayMrcc)
+        {
+            middleRowColumnsCount++;
+        }
+        if (Model.FooterDisplayMrrc)
+        {
+            middleRowColumnsCount++;
+        }
+
+        <!--- Left Column --->
+        if (Model.FooterDisplayMrlc)
+        {
+            <div class="row">
+                <div class="col-md-@("Calculated Column Size")">
+                    <h5>@Model.HeaderTitle</h5>
+                </div>
+            </div>
+        }
+        <!--- Middle Column --->
+        if (Model.FooterDisplayMrcc)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <ul>
+                        @*Location contacts are not working yet, the media picker used to select the node thinks 
+                            it is a media item and not a content node.  Need to figure out how to fix this.
+                            May need a custom property editor to handle this.
+                            @{
+                            foreach (var link in Model.FooterContact.Content)
+                            {
+                                <li>
+                                    <a href="@(link.Url)" target="@(link.Target)">@(
+                            link.Name
+                            )</a>
+                                </li>
+                            }
+                        }*@
+                    </ul>
+                </div>
+            </div>
+            
+        }
+        
+        <div class="row">
+            <div class="col left">
+                <h5>CONTENT</h5>
+            </div>
+            <div class="col-6 middle">
+                <h5>CONTENT</h5>
+            </div>
+            <div class="col right">
+                <copy>
+                    Copyright @("") @(DateTime.Today.Year)
+                </copy>
+            </div>
+        </div>
+        <!--- Certifcations Section --->
+
+        <div class="row text-center footerbades">
+            @*@foreach (MediaWithCrops badge in model.FooterBadges)
+        {
+        <div class="col">
+        <img src="@(badge.MediaUrl())" alt="@(badge.)" />
+        </div>								}
+        }*@
+        </div>
+
+        <!--- Bottom Section Links --->
+    }
+    else
+    {
+        @*Create a default minimal fallback footer*@
+        <!--- An error occurred template no footer doc was found --->
+        <div class="row">
+            <div class="col-md-12">
+                <img src="/images/Logos/healthtech-solutions-logo-footer.png" style="max-width:100%;" alt="HealthTech Solutions Logo" />
+                <p><copy>Copyright HealthTech Solutions Inc. @DateTime.Today.Year.ToString("YYYY")</copy> </p>
+            </div>
+        </div>
+    }
+
+    @*<div class="row text-center certs">
+    @{
+    List<MediaWithCrops> certImages = new List<MediaWithCrops>();
+    int count = 1;
+    while (true)
+    {
+    var search = $"certImage{count}";
+    var cert = Model.Value<MediaWithCrops>(search);
+    if (cert == null)
+    {
+    break;
+    }
+    certImages.Add(cert);
+    count++;
+    }
+
+    foreach (var cert in certImages)
+    {
+    <div class="col" style="border:2px; border-style:dashed;">
+    <img src="@cert.MediaUrl()" />
+    </div>
+    }
+    }
+    </div>*@
+
+</div>
