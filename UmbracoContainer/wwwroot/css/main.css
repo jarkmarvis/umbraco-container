@@ -1,3 +1,23 @@
+:root {
+    --ht-dark-green: #009478;
+    --ht-light-green: #93d50a;
+    --ht-primary-blue: #017299;
+    --ht-secondary-blue: #00609c;
+    --ht-hover-dark-green: #23527c;
+    --ht-light: #fff;
+    --ht-light-grey: #808083;
+    --ht-darker-grey: #6d6e71;
+    --ht-light-bg: #e1e1eb;
+}
+
+ht-link a {
+    color: var(--ht-light-green);
+    text-decoration: none;
+}
+
+ht-link a:hover {
+    color: var(--ht-hover-dark-green);
+}
 
 /* ---------- FONTS ---------- */
 
@@ -279,13 +299,13 @@ a.featured-link:hover .thumbnail-blog .thumbnail-img {
 /* ---------- FOOTER ---------- */
 
 .footer {
-    background-color:#1b264f;
+    background-color: #1b264f;
     color: white;
 }
 
-.footer h4 {
-    margin-bottom: 20px;
-}
+    .footer h4 {
+        margin-bottom: 20px;
+    }
 
 ul.footer-links {
     list-style-type: none;
@@ -293,22 +313,22 @@ ul.footer-links {
     padding: 0;
 }
 
-ul.footer-links li {
-    line-height: 32px;
-}
+    ul.footer-links li {
+        line-height: 32px;
+    }
 
-ul.footer-links li a {
-    text-decoration: none;
-    color: rgba(255, 255, 255, .7);
-}
+        ul.footer-links li a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, .7);
+        }
 
-ul.footer-links li a:hover, ul.footer-links li a:focus {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 1);
-}
+            ul.footer-links li a:hover, ul.footer-links li a:focus {
+                text-decoration: none;
+                color: rgba(255, 255, 255, 1);
+            }
 
 .footer img {
-    width:30%;
+    width: 30%;
 }
 
 .footer .certs {
@@ -321,4 +341,3 @@ ul.footer-links li a:hover, ul.footer-links li a:focus {
     max-width: 100%;
     height: auto;
 }*/
-        
