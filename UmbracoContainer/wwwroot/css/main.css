@@ -10,13 +10,23 @@
     --ht-light-bg: #e1e1eb;
 }
 
-ht-link a {
+.ht-navbar {
+    background-color: #e3f2fd;
+}
+
+.ht-link a {
     color: var(--ht-light-green);
     text-decoration: none;
 }
 
-ht-link a:hover {
+.ht-link a:hover {
     color: var(--ht-hover-dark-green);
+}
+
+.hts-header .logo-wrapper img.logo {
+    height: 3.75rem;
+    min-width: 9.375rem;
+    position: relative;
 }
 
 /* ---------- FONTS ---------- */
