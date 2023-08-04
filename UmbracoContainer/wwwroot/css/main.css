@@ -10,6 +10,11 @@
     --ht-light-bg: #e1e1eb;
 }
 
+body {
+    padding-top: 4rem;
+}
+
+/* ---------- Header ---------- */
 .ht-navbar {
     background-color: #e3f2fd;
 }
@@ -19,15 +24,78 @@
     text-decoration: none;
 }
 
-.ht-link a:hover {
-    color: var(--ht-hover-dark-green);
-}
+    .ht-link a:hover {
+        color: var(--ht-hover-dark-green);
+    }
+/*
+@media only screen and (min-width: 720px) {
+    a.nav-item.nav-link {
+        padding: 0 0.5em;
+    }
+
+    @media only screen and (min-width: 992px) {
+        a.nav-item.nav-link {
+            padding: 0 0.5em;
+        }
+
+        a nav-item:not(:last-child) .nav-link {
+            border-right: 2px solid #000000;
+        }
+    }
+
+    .nav-item:not(:last-child) .nav-link {
+        border-right: 2px solid #000000;
+    }
+}*/
 
 .hts-header .logo-wrapper img.logo {
     height: 3.75rem;
     min-width: 9.375rem;
     position: relative;
 }
+
+/* ---------- FOOTER ---------- */
+
+.footer {
+    background-color: #1b264f;
+    color: white;
+}
+
+    .footer h4 {
+        margin-bottom: 20px;
+    }
+
+ul.footer-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+    ul.footer-links li {
+        line-height: 32px;
+    }
+
+        ul.footer-links li a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, .7);
+        }
+
+            ul.footer-links li a:hover, ul.footer-links li a:focus {
+                text-decoration: none;
+                color: rgba(255, 255, 255, 1);
+            }
+
+.footer img {
+    width: 30%;
+}
+
+.footer .certs {
+    padding: 1rem;
+}
+
+
+
+/* ----------- TODO: clean up the unused css models below  */
 
 /* ---------- FONTS ---------- */
 
@@ -101,32 +169,6 @@ p {
     color:white;
 }*/
 
-/* ---------- NAVBAR ---------- */
-/*.navbar-light .navbar-brand {
-    color:#101f3c;
-}
-
-.navbar-brand {
-    margin-right:30px;
-}
-
-.navbar-light .navbar-nav .nav-link {
-    color:rgba(16, 31, 60, .8);
-}
-
-.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
-    color:rgba(16, 31, 60, 1);
-}
-
-.navbar-light .navbar-nav .nav-link.active {
-    color:rgba(16, 31, 60, 1);
-    font-weight: bold;
-}
-
-.navbar-expand .navbar-nav .nav-link {
-    padding-right: 2rem;
-    padding-left: 2rem;
-}*/
 
 /* ---------- MAIN CONTAINER ---------- */
 
@@ -306,44 +348,7 @@ a.featured-link:hover .thumbnail-blog .thumbnail-img {
     margin-bottom: 100px;
 }*/
 
-/* ---------- FOOTER ---------- */
 
-.footer {
-    background-color: #1b264f;
-    color: white;
-}
-
-    .footer h4 {
-        margin-bottom: 20px;
-    }
-
-ul.footer-links {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-    ul.footer-links li {
-        line-height: 32px;
-    }
-
-        ul.footer-links li a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, .7);
-        }
-
-            ul.footer-links li a:hover, ul.footer-links li a:focus {
-                text-decoration: none;
-                color: rgba(255, 255, 255, 1);
-            }
-
-.footer img {
-    width: 30%;
-}
-
-.footer .certs {
-    padding: 1rem;
-}
 
 /* ---------- STYLE FOR GRID EDITOR ---------- */
 

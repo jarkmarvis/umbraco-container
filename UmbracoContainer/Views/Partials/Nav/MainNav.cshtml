@@ -1,43 +1,82 @@
-﻿@using HealthTechSolutions.ContentModels
-@using Umbraco.Cms.Core
-@using Umbraco.Cms.Core.Models;
-@using Umbraco.Cms.Core.Models.PublishedContent
+﻿﻿@using Umbraco.Cms.Core.Models
 @using Umbraco.Cms.Core.Routing
-@using Umbraco.Extensions
+﻿@using HealthTechSolutions.ContentModels
 
 @inject IPublishedValueFallback PublishedValueFallback
 @inject IPublishedUrlProvider PublishedUrlProvider
 
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-    // Query for grabbing the navigation items
-    var home = Umbraco.ContentAtRoot().FirstOrDefault();
-    var selection = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback) && x.Name != "Footer").ToArray();
-    var pageSettings = Model.Value<MediaWithCrops>("headerLogo", fallback: Fallback.ToAncestors);
+    var homePage = Umbraco.ContentAtRoot().FirstOrDefault();
+    var menuItems = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
+    int tabIndex = 0;
 }
-<div class="container-fluid hts-header sticky-top flex-lg-nowrap flex-lg-row flex-lg-nowrap d-flex hts-header">
-    <div class="logo-wrapper p-lg-2 p-1">
-        @{
-            int i = 0;
-            <a class="navbar-brand" aria-current="page" tabindex="@(i)" href="@(home.Url(PublishedUrlProvider))">
-                <img class="logo" src="@(pageSettings.MediaUrl())" alt="Header Logo" />
-            </a>
-            i++;
-        }
-    </div>
-    <nav class="navbar nav-fill navbar-light bg-light">
-        @if (selection?.Length > 0)
-        {
-            <div class="container-fluid list-group-horizontal-lg list-group-horizontal-md list-group sticky-top">
-                @*@{
-                    <a class="navbar-brand list-group-item " aria-current="true" tabindex="@(i)" href="@(home.Url(PublishedUrlProvider))">@(home.Name)</a>
-                    i++;
-                }*@
-                @foreach (var item in selection)
-                {
-                    <a class="navbar-brand list-group-item @(item.Path == Model.Path ? "active" : "")" aria-current="page" tabindex="@(i)" href="@(item.Url(PublishedUrlProvider))">@(item.Name)</a>
+<div class="container-fluid sticky-top flex-lg-nowrap flex-lg-row d-flex hts-header bg-light">
+    <nav class="container navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm ht-navbar" aria-label="Main Navigation">
+        <div class="container">
+            <div class="container logo-wrapper col-12 col-sm-3 pd-1 d-flex d-sm-block justify-content-md-start">
+                @{
+                    var headerLogo = Model.Value<MediaWithCrops>("mainNavLogo", fallback: Fallback.ToAncestors);
+                    if (headerLogo != null)
+                    {
+                        <a class="navbar-brand" aria-current="page" tabindex="@(tabIndex)" href="@(homePage?.Url(PublishedUrlProvider))">
+                            <img class="logo image-fluid" src="@(headerLogo.MediaUrl())" alt="Header Logo" />
+                        </a>
+                        tabIndex++;
+                    }
                 }
             </div>
-        }
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    @if (menuItems?.Length > 0)
+                    {
+                        <ul class="navbar-nav navbar-text pe-auto pb-2 pb-lg-0 ms-auto">
+                            @foreach (var item in menuItems)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @(item.Path == Model.Path ? "active" : "")"
+                                    @(item.Path == Model.Path ? "aria-current=page" : "")
+                                       tabindex="@(tabIndex)"
+                                       href="@(item.Url(PublishedUrlProvider))">
+                                        @(item.Name)
+                                    </a>
+                                </li>
+                                tabIndex++;
+                            }
+                        </ul>
+                    }
+                    
+                </div>
+                <div class="pe-auto ms-auto">
+                    <form class="d-flex">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
     </nav>
+</div>
+
+
+
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <span class="fs-4">Simple header</span>
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+        </ul>
+    </header>
 </div>
