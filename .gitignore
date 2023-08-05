@@ -2,9 +2,9 @@
 # Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
 ################################################################################
 
-/.vs/UmbracoContainer
 /UmbracoContainer/umbraco/models
 /usync_export_20230731_212832
 /OLD_usync_export_20230731_212832.zip
 /UmbracoContainer/.vs
-/.vs/ProjectEvaluation/umbracocontainer.projects.v7.bin
+/.vs/
+/.vs/ProjectEvaluation/umbracocontainer.metadata.v7.bin
