@@ -10,13 +10,10 @@
     --ht-light-bg: #e1e1eb;
 }
 
-body {
-    padding-top: 4rem;
-}
 
 /* ---------- Header ---------- */
 .ht-navbar {
-    background-color: #e3f2fd;
+    background-color: var(--ht-light-green) !important;
 }
 
 .ht-link a {
@@ -27,6 +24,22 @@ body {
     .ht-link a:hover {
         color: var(--ht-hover-dark-green);
     }
+
+.right-nav-wrapper {
+    display: inherit;
+    justify-content: flex-end;
+}
+
+.navbar-right {
+    align-items: center;
+    color: var(--color-white);
+    display: flex;
+    flex-direction: row;
+    font-family: var(--font-sans-serif);
+    font-size: .875rem;
+    font-weight: 700;
+    padding-right: 16px;
+}
 /*
 @media only screen and (min-width: 720px) {
     a.nav-item.nav-link {
@@ -56,9 +69,8 @@ body {
 
 /* ---------- FOOTER ---------- */
 
-.footer {
-    background-color: #1b264f;
-    color: white;
+.ht-footer {
+    background-color: var(--ht-dark-green) !important;
 }
 
     .footer h4 {

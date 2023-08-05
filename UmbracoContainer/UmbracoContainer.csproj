@@ -38,6 +38,7 @@
 
 	<ItemGroup>
 	  <Content Remove="wwwroot\css\bootstrap.min.css" />
+	  <Content Remove="wwwroot\css\cdn.jsdelivr.net_npm_bootstrap-icons@1.10.5_font_bootstrap-icons.css" />
 	</ItemGroup>
 
 	<PropertyGroup>

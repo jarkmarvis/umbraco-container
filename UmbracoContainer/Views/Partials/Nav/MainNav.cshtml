@@ -7,76 +7,44 @@
 
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-    var homePage = Umbraco.ContentAtRoot().FirstOrDefault();
-    var menuItems = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
-    int tabIndex = 0;
+	var homePage = Umbraco.ContentAtRoot().FirstOrDefault();
+	var menuItems = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
+	int tabIndex = 0;
 }
-<div class="container-fluid sticky-top flex-lg-nowrap flex-lg-row d-flex hts-header bg-light">
-    <nav class="container navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm ht-navbar" aria-label="Main Navigation">
-        <div class="container">
-            <div class="container logo-wrapper col-12 col-sm-3 pd-1 d-flex d-sm-block justify-content-md-start">
-                @{
-                    var headerLogo = Model.Value<MediaWithCrops>("mainNavLogo", fallback: Fallback.ToAncestors);
-                    if (headerLogo != null)
-                    {
-                        <a class="navbar-brand" aria-current="page" tabindex="@(tabIndex)" href="@(homePage?.Url(PublishedUrlProvider))">
-                            <img class="logo image-fluid" src="@(headerLogo.MediaUrl())" alt="Header Logo" />
-                        </a>
-                        tabIndex++;
-                    }
-                }
-            </div>
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    @if (menuItems?.Length > 0)
-                    {
-                        <ul class="navbar-nav navbar-text pe-auto pb-2 pb-lg-0 ms-auto">
-                            @foreach (var item in menuItems)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link @(item.Path == Model.Path ? "active" : "")"
-                                    @(item.Path == Model.Path ? "aria-current=page" : "")
-                                       tabindex="@(tabIndex)"
-                                       href="@(item.Url(PublishedUrlProvider))">
-                                        @(item.Name)
-                                    </a>
-                                </li>
-                                tabIndex++;
-                            }
-                        </ul>
-                    }
-                    
-                </div>
-                <div class="pe-auto ms-auto">
-                    <form class="d-flex">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    </nav>
-</div>
-
-
-
-<div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-            <span class="fs-4">Simple header</span>
-        </a>
-
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-        </ul>
-    </header>
+@* *** Note: this master template will only work for content types that use the Page Settings composition.*** *@
+<div class="container-flex ht-navbar">
+	<nav class="navbar navbar-expand-lg container">
+		<div class="container-fluid">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				@if (menuItems?.Length > 0)
+				{
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						@foreach (var item in menuItems)
+						{
+							<li class="nav-item">
+								<a class="nav-link @(item.Path == Model.Path ? "active" : "")"
+								@(item.Path == Model.Path ? "aria-current=page" : "")
+								   tabindex="@(tabIndex)"
+								   href="@(item.Url(PublishedUrlProvider))">
+									@(item.Name)
+								</a>
+							</li>
+							tabIndex++;
+						}
+					</ul>
+				}
+			</div>
+			<div class="d-block d-md-flex">
+				<div class="input-group w-auto" role="search">
+					<input type="text" class="form-control me-0 rounded-start-5 shadow-sm" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+					<span class="btn btn-primary input-group-text rounded-end-5 shadow-sm" type="submit" id="search">
+						<i class="bi bi-search text-light"></i>
+					</span>
+				</div>
+			</div>
+		</div>
+	</nav>
 </div>
