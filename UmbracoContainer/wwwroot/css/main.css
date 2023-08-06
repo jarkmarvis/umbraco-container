@@ -8,6 +8,8 @@
     --ht-light-grey: #808083;
     --ht-darker-grey: #6d6e71;
     --ht-light-bg: #e1e1eb;
+    --ht-very-lt-grey: #d9d6d6;
+
 }
 
 
@@ -40,6 +42,14 @@
     font-weight: 700;
     padding-right: 16px;
 }
+
+.social-grey {
+    color: var(--ht-very-lt-grey);
+}
+
+    .social-grey:hover {
+        color: var(--ht-light-grey);
+}
 /*
 @media only screen and (min-width: 720px) {
     a.nav-item.nav-link {
@@ -70,7 +80,7 @@
 /* ---------- FOOTER ---------- */
 
 .ht-footer {
-    background-color: var(--ht-dark-green) !important;
+    background-color: var(--ht-secondary-blue) !important;
 }
 
     .footer h4 {

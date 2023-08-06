@@ -1,96 +1,109 @@
 ﻿@using HealthTechSolutions.ContentModels;
 @using Umbraco.Cms.Core.Models;
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@inject IPublishedValueFallback PublishedValueFallback
 
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPageSettings>
 @{
     Layout = null;
+
+    // For projects created after January 2020
+    // Todo there is either a bug in the Umbraco code or I am doing something wrong.
+    // It could be a missing configuration setting. 
+    // The Fallback.To(Fallback.Ancestors) is not working.  It is returning null.
+    // var a = Model.ValueFor(x => x.SlideTransition, fallback: Fallback.To(Fallback.Ancestors));
+    // I need to access the PageSettings class which 
+    
+    var b = Model.ValueFor(x => x.SlideTransition, fallback: Fallback.To(Fallback.Ancestors));
+
+    @*Location contacts are not working yet, the media picker used to select the node thinks
+    it is a media item and not a content node.  Need to figure out how to fix this.
+    May need a custom property editor to handle this.*@
 
     //var siteFooter = Umbraco.ContentAtRoot().FirstOrDefault().ChildrenOfType("siteFooter").FirstOrDefault() as SiteFooter;
 
     // @(await Component.InvokeAsync("FooterView", new { siteFooter = siteFooter }))
 }
 
-<div class="container-flex ht-footer text-light">
-    <div class="container d-block">
-        @if (Model != null)
+<div class="container-fluid ht-footer px-0">
+    @if (Model != null)
+    {
+        <!--- Top Section Links (Optional) --->
+        if (Model.FooterDisplayTR)
         {
-            <!--- Top Section Links (Optional) --->
-            if (Model.FooterDisplayTR)
-            {
-                <div class="container-flex overflow-visible bg-dark">
-                    <ul class="list-group">
+            <div class="container-flex ht-navbar py-1 bg-gradient shadow-lg">
+                <div class="container">
+                    <ul class="nav justify-content-center">
                         @{
+                            //Model.ValueFor(x => x.PageTitle, fallback: Fallback.To(Fallback.Ancestors, Fallback.DefaultValue), defaultValue: new HtmlString("Default page title"))
                             foreach (var link in Model.TopRowLinks)
                             {
-                                <li>
-                                    <a href="@(link.Url)" target="@(link.Target)">@(link.Name)</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@(link.Url)" target="@(link.Target)">@(link.Name)</a>
                                 </li>
                             }
                         }
                         <li>List Empty</li>
                     </ul>
                 </div>
-            }
+            </div>
+        }
+        <div class="container d-block text-light shadow">
             <!--- Middle Row Up To 3 Columns --->
-            int middleRowColumnsCount = 0;
-            if (Model.FooterDisplayMrlc) middleRowColumnsCount++;
+            @{
+                int middleRowColumnsCount = 0;
+                if (Model.FooterDisplayMrlc) middleRowColumnsCount++;
 
-            if (Model.FooterDisplayMrcc) middleRowColumnsCount++;
+                if (Model.FooterDisplayMrcc) middleRowColumnsCount++;
 
-            if (Model.FooterDisplayMrrc) middleRowColumnsCount++;
-
+                if (Model.FooterDisplayMrrc) middleRowColumnsCount++;
+            }
             @if (middleRowColumnsCount > 0)
             {
-                <div class="container d-block d-md-flex">
+                <div class="d-block d-md-flex">
+
                     <!--- Left Column --->
                     @if (Model.FooterDisplayMrlc)
                     {
-                            <div class="col-md-@(middleRowColumnsCount == 3 ? "3" : (12 / middleRowColumnsCount).ToString())">
+                        <div class="flex-md-column p-2 bd-highlight col-md-@(middleRowColumnsCount == 3 ? "3" : (12 / middleRowColumnsCount).ToString())">
                             <h5>@(Model.HeaderTitle) asfaw</h5>
                         </div>
                     }
+
                     <!--- Middle Column --->
                     @if (Model.FooterDisplayMrcc)
                     {
-                        <div class="col-md-@(middleRowColumnsCount == 3 ? "6" : (12 / middleRowColumnsCount).ToString())">
-                            <ul>
+                        <div class="flex-md-column text-center p-2 col-md-@(middleRowColumnsCount == 3 ? "6" : (12 / middleRowColumnsCount).ToString())">
+                            <ul class="list-group list-unstyled">
                                 <li>Logo</li>
                                 <li>Contact Info</li>
                                 <li>Address</li>
                                 <li>Phone</li>
                                 <li>Email</li>
                                 <li>Hours</li>
-                                @*Location contacts are not working yet, the media picker used to select the node thinks
-                    it is a media item and not a content node.  Need to figure out how to fix this.
-                    May need a custom property editor to handle this.*@
-                                @*@{
-                    foreach (var link in Model.FooterContact)
-                    {
-                    <li>
-                    <a href="@(link.Url)" target="@(link.Target)">
-                    @(
-                    link.Name
-                    )
-                    </a>
-                    </li>
-                    }
-                    }*@
                             </ul>
                         </div>
                     }
+
                     <!--- Right Column --->
                     @if (Model.FooterDisplayMrrc)
                     {
-                        <div class="col-md-@(middleRowColumnsCount == 3 ? "3" : (12 / middleRowColumnsCount).ToString())">
-                            <copy>
+                        <div class="flex-md-column text-end p-2 col-md-@(middleRowColumnsCount == 3 ? "3" : (12 / middleRowColumnsCount).ToString())">
+                            <div class="list-inline">
+                                <a class="btn list-inline-item p-0"><i class="bi bi-facebook fs-2 social-grey"></i></a>
+                                <a class="btn list-inline-item p-0"><i class="bi bi-linkedin fs-2 social-grey"></i></a>
+                                <a class="btn list-inline-item p-0"><i class="bi bi-twitter fs-2 social-grey"></i></a>
+                            </div>
+                            <p class="align-baseline">
                                 Copyright @("") @(DateTime.Today.Year)
-                            </copy>
+                            </p>
                         </div>
                     }
                 </div>
             }
             <!--- Certifcations Section --->
-            if (Model.FooterDisplayBadges)
+            @if (Model.FooterDisplayBadges)
             {
                 <div class="row text-center footerbadges">
                     @*@foreach (MediaWithCrops badge in model.FooterBadges)
@@ -102,20 +115,7 @@
                 </div>
             }
             <!--- Bottom Section Links --->
-        }
-        else
-        {
-            @*Create a default minimal fallback footer*@
-            <!--- An error occurred template no footer doc was found --->
-            <div class="row">
-                <div class="col-md-12">
-                    <img src="/images/Logos/healthtech-solutions-logo-footer.png" style="max-width:100%;" alt="HealthTech Solutions Logo" />
-                    <p><copy>Copyright HealthTech Solutions Inc. @DateTime.Today.Year.ToString("YYYY")</copy> </p>
-                </div>
-            </div>
-        }
-
-        @*<div class="row text-center certs">
+            @*<div class="row text-center certs">
         @{
         List<MediaWithCrops> certImages = new List<MediaWithCrops>();
         int count = 1;
@@ -140,5 +140,17 @@
         }
         </div>*@
 
-    </div>
+        </div>
+    }
+    else
+    {
+        @*Create a default minimal fallback footer*@
+        <!--- An error occurred template no footer doc was found --->
+        <div class="row">
+            <div class="col-md-12">
+                <img src="/images/Logos/healthtech-solutions-logo-footer.png" style="max-width:100%;" alt="HealthTech Solutions Logo" />
+                <p><copy>Copyright HealthTech Solutions Inc. @DateTime.Today.Year.ToString("YYYY")</copy> </p>
+            </div>
+        </div>
+    }
 </div>
