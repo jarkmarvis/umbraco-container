@@ -15,7 +15,7 @@
     // var a = Model.ValueFor(x => x.SlideTransition, fallback: Fallback.To(Fallback.Ancestors));
     // I need to access the PageSettings class which 
     
-    var b = Model.ValueFor(x => x.SlideTransition, fallback: Fallback.To(Fallback.Ancestors));
+    ///var b = Model.ValueFor(x => x.SlideTransition, fallback: Fallback.To(Fallback.Ancestors));
 
     @*Location contacts are not working yet, the media picker used to select the node thinks
     it is a media item and not a content node.  Need to figure out how to fix this.
@@ -37,6 +37,7 @@
                     <ul class="nav justify-content-center">
                         @{
                             //Model.ValueFor(x => x.PageTitle, fallback: Fallback.To(Fallback.Ancestors, Fallback.DefaultValue), defaultValue: new HtmlString("Default page title"))
+                            //Model.Value()
                             foreach (var link in Model.TopRowLinks)
                             {
                                 <li class="nav-item">
