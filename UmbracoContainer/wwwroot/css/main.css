@@ -5,18 +5,43 @@
     --ht-secondary-blue: #00609c;
     --ht-hover-dark-green: #23527c;
     --ht-light: #fff;
-    --ht-light-grey: #808083;
+    --ht-light-grey: #9e9ea3;
     --ht-darker-grey: #6d6e71;
     --ht-light-bg: #e1e1eb;
     --ht-very-lt-grey: #d9d6d6;
-
 }
 
 
 /* ---------- Header ---------- */
 .ht-navbar {
-    background-color: var(--ht-light-green) !important;
+    background-color: var(--ht-dark-green) !important;
+    color: var(--ht-light);
 }
+
+.ht-nav-tog {
+    color: var(--ht-light);
+    font-size: 1.45rem;
+    margin-right: 1rem;
+    transition: .2s;
+    border: 2px solid var(--ht-light);
+    width: 3rem;
+    height: 3rem;
+}
+
+    .ht-nav-tog:hover {
+        color: var(--ht-light-grey);
+        border: 3px solid var(--ht-light-grey);
+    }
+
+.ht-nav-link-lt {
+    color: var(--ht-light);
+    transition: .2s;
+    font-size: 1.45rem;
+}
+
+    .ht-nav-link-lt:hover {
+        color: var(--ht-hover-dark-green);
+    }
 
 .ht-link a {
     color: var(--ht-light-green);
@@ -45,11 +70,13 @@
 
 .social-grey {
     color: var(--ht-very-lt-grey);
+    transition: .2s;
 }
 
     .social-grey:hover {
         color: var(--ht-light-grey);
-}
+        transition: .2s;
+    }
 /*
 @media only screen and (min-width: 720px) {
     a.nav-item.nav-link {
@@ -83,9 +110,9 @@
     background-color: var(--ht-secondary-blue) !important;
 }
 
-    .footer h4 {
-        margin-bottom: 20px;
-    }
+.footer h4 {
+    margin-bottom: 20px;
+}
 
 ul.footer-links {
     list-style-type: none;

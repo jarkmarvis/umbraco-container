@@ -1,6 +1,6 @@
 ﻿﻿@using Umbraco.Cms.Core.Models
 @using Umbraco.Cms.Core.Routing
-﻿@using HealthTechSolutions.ContentModels
+@using Umbraco.Cms.Web.Common.PublishedModels
 
 @inject IPublishedValueFallback PublishedValueFallback
 @inject IPublishedUrlProvider PublishedUrlProvider
@@ -13,10 +13,10 @@
 }
 @* *** Note: this master template will only work for content types that use the Page Settings composition.*** *@
 <div class="container-flex ht-navbar">
-	<nav class="navbar navbar-expand-lg container">
+	<nav class="navbar navbar-expand-lg containter-flex container-lg">
 		<div class="container-fluid">
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
+			<button class="navbar-toggler btn ht-nav-tog" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<i class="bi bi-list "></i>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				@if (menuItems?.Length > 0)
@@ -25,7 +25,7 @@
 						@foreach (var item in menuItems)
 						{
 							<li class="nav-item">
-								<a class="nav-link @(item.Path == Model.Path ? "active" : "")"
+								<a class="nav-link ht-nav-link-lt @(item.Path == Model.Path ? "active" : "")"
 								@(item.Path == Model.Path ? "aria-current=page" : "")
 								   tabindex="@(tabIndex)"
 								   href="@(item.Url(PublishedUrlProvider))">
