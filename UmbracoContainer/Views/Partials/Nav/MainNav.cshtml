@@ -1,7 +1,6 @@
-﻿﻿@using Umbraco.Cms.Core.Models
-@using Umbraco.Cms.Core.Routing
+﻿@using Umbraco.Cms.Core.Routing
+@using Umbraco.Cms.Core.Models
 @using Umbraco.Cms.Web.Common.PublishedModels
-
 @inject IPublishedValueFallback PublishedValueFallback
 @inject IPublishedUrlProvider PublishedUrlProvider
 
@@ -12,7 +11,7 @@
 	int tabIndex = 0;
 }
 @* *** Note: this master template will only work for content types that use the Page Settings composition.*** *@
-<div class="container-flex ht-navbar">
+<div class="container-flex ht-navbar sticky-md-top">
 	<nav class="navbar navbar-expand-lg containter-flex container-lg">
 		<div class="container-fluid">
 			<button class="navbar-toggler btn ht-nav-tog" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

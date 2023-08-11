@@ -16,6 +16,7 @@
 .ht-navbar {
     background-color: var(--ht-dark-green) !important;
     color: var(--ht-light);
+    border-bottom: 8px solid var(--ht-light-green);
 }
 
 .ht-nav-tog {
@@ -33,7 +34,7 @@
         border: 3px solid var(--ht-light-grey);
     }
 
-.ht-nav-link-lt {
+.nav-link.ht-nav-link-lt {
     color: var(--ht-light);
     transition: .2s;
     font-size: 1.45rem;
@@ -108,11 +109,24 @@
 
 .ht-footer {
     background-color: var(--ht-secondary-blue) !important;
+    border-top: 8px solid var(--ht-light-green);
+}
+.ht-footer-navbar {
+    background-color: var(--ht-dark-green) !important;
 }
 
 .footer h4 {
     margin-bottom: 20px;
 }
+
+.ht-footer .nav-link {
+    color: var(--ht-light);
+    font-size: 1.25rem;
+    transition: .2s;
+}
+    .ht-footer .nav-link:hover {
+        color: var(--ht-hover-dark-green);
+    }
 
 ul.footer-links {
     list-style-type: none;

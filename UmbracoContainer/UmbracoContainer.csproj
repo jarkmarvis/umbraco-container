@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
@@ -11,13 +11,6 @@
 	<ItemGroup Condition="'$(OS)' == 'Windows_NT'">
 		<PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="68.2.0.9" />
 		<RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="68.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Our.Iconic" Version="5.3.0" />
-		<PackageReference Include="Umbraco.Cms" Version="12.0.1" />
-		<PackageReference Include="Umbraco.Cms.Persistence.Sqlite" Version="12.0.1" />
-		<PackageReference Include="uSync" Version="12.0.2" />
 	</ItemGroup>
 
 
@@ -41,6 +34,15 @@
 	  <Content Remove="wwwroot\css\cdn.jsdelivr.net_npm_bootstrap-icons@1.10.5_font_bootstrap-icons.css" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="Umbraco.Cms" Version="12.0.1" />
+	  <PackageReference Include="Umbraco.Cms.Persistence.Sqlite" Version="12.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\" />
+	</ItemGroup>
+
 	<PropertyGroup>
 		<CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
 	</PropertyGroup>
@@ -49,6 +51,7 @@
 	<PropertyGroup>
 		<RazorCompileOnBuild>false</RazorCompileOnBuild>
 		<RazorCompileOnPublish>false</RazorCompileOnPublish>
+		<UserSecretsId>8a01a247-6c0d-4b1c-b7f2-82bd0c9dabbd</UserSecretsId>
 	</PropertyGroup>
 
 </Project>
