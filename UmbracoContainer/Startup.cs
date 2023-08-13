@@ -41,6 +41,7 @@ namespace UmbracoContainer
             services.AddUmbraco(_env, _config)
                 .AddBackOffice()
                 .AddWebsite()
+                .AddDeliveryApi()
                 .AddComposers()
                 .Build();
         }
@@ -56,6 +57,8 @@ namespace UmbracoContainer
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //app.UseHttpsRedirection();
 
             app.UseUmbraco()
                 .WithMiddleware(u =>
