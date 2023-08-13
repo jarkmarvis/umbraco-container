@@ -24,7 +24,7 @@
                 var overlayId = "ovrly-" + bior.Id;
                 var imageMaxWidth = bior.UmbracoFile.GetCrop(cropAlias).Width;
 
-                <div class="accordion-item p-0 m-0" style="max-width:max-content;height:fit-content;display:inline-block;float:none;vertical-align:top;width:19%;">
+                <div class="accordion-item p-0 m-0 emp-bio-item">
                     <div id="@headerId" class="accordion-header position-relative m-0 p-0 flex-md-wrap" style="max-width:@(imageMaxWidth)px;">
                         <a href="#" class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@(collapseId)" aria-expanded="false" aria-controls="@(collapseId)">
                             <div id="@(overlayId)" class="overlay"></div>
@@ -42,11 +42,12 @@
                             </div>
                         </a>
                     </div>
-
                 </div>
-                <div id="@collapseId" class="accordion-collapse collapse overflow-y-scroll w-100" aria-labelledby="@headerId" data-bs-parent="#employeeBios" style="max-height:@(imageMaxWidth)px;float:left;">
-                    <div class="accordion-body">
-                        <p>@bior.EmployeeBio</p>
+                <div id="@collapseId" class="accordion-collapse collapse w-100 mb-4 overflow-hidden float-start" aria-labelledby="@headerId" data-bs-parent="#employeeBios" style="max-height:@(imageMaxWidth)px;">
+                    <div class="accordion-body overflow-hidden overflow-y-scroll float-start emp-bio-detail">
+                        <span>@(bior.EmployeeTitle)</span>
+                        <h2 class="border-bottom">@(bior.EmployeeName)</h2>
+                        <p class="">@bior.EmployeeBio</p>
                     </div>
                 </div>
             }

@@ -9,8 +9,13 @@
     --ht-darker-grey: #6d6e71;
     --ht-light-bg: #e1e1eb;
     --ht-very-lt-grey: #d9d6d6;
+    --ht-font-color-dark: #6d6e71;
 }
 
+body {
+    font-family: "Nexa-Regular", Arial, 'Helvetica Neue', Helvetica, Tahoma, sans-serif;
+    color: var(--ht-font-color-dark);
+}
 
 /* ---------- Header ---------- */
 .ht-navbar {
@@ -460,4 +465,55 @@ a.featured-link:hover .thumbnail-blog .thumbnail-img {
 .accordion-button:not(.collapsed)::after {
     background-image: none;
     width: 0;
+}
+
+.emp-bio-item {
+    max-width: max-content;
+    height: fit-content;
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+    width: 100%;
+}
+
+.emp-bio-detail {
+    max-height: inherit;
+    height: 100%;
+    width: 90%;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .emp-bio-item {
+        display: inline-block;
+        width: 49%;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .emp-bio-item {
+        width: 32%;
+    }
+    .emp-bio-detail {
+        width: 75%;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .emp-bio-item {
+        width: 24%;
+    }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .emp-bio-item {
+        width: 19%;
+    }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
 }
