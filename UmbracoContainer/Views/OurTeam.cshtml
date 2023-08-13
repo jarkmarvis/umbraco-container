@@ -1,0 +1,55 @@
+﻿@using Umbraco.Cms.Core.Media;
+@using Umbraco.Cms.Core.Models;
+@using Umbraco.Cms.Web.Common.PublishedModels;
+
+@inject IImageUrlGenerator imageUrlGenerator;
+
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<EmployeeBios>
+@{
+    Layout = "Master.cshtml";
+}
+
+@{
+    var bios = Model.EmployeeBioList;
+}
+<div class="container pb-3" id="employeeBios">
+    @{
+        <div class="accordion justify-content-center">
+            @foreach (var bio in bios)
+            {
+                string cropAlias = "emp-bio-md"; //TODO: make this a property on the content type
+                var bior = bio as EmployeeBioMt;
+                var headerId = "heading" + bior.Id;
+                var collapseId = "collapse" + bior.Id;
+                var overlayId = "ovrly-" + bior.Id;
+                var imageMaxWidth = bior.UmbracoFile.GetCrop(cropAlias).Width;
+
+                <div class="accordion-item p-0 m-0" style="max-width:max-content;height:fit-content;display:inline-block;float:none;vertical-align:top;width:19%;">
+                    <div id="@headerId" class="accordion-header position-relative m-0 p-0 flex-md-wrap" style="max-width:@(imageMaxWidth)px;">
+                        <a href="#" class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@(collapseId)" aria-expanded="false" aria-controls="@(collapseId)">
+                            <div id="@(overlayId)" class="overlay"></div>
+                            <img class="img-fluid" style="max-width:100%;" src="@(Url.GetCropUrl(bio, cropAlias, true, UrlMode.Auto))" alt="@(bior.EmployeeName)" />
+                            <div data-bs-toggle="popover"
+                                 data-bs-placement="bottom"
+                                 data-bs-trigger="hover"
+                                 data-bs-html="false"
+                                 data-bs-animation="true"
+                                 data-bs-container="#@(overlayId)"
+                                 class="custom-popover w-100">
+                                <h3 class="popover-header">@(bior.EmployeeTitle)</h3>
+                                <div class="popover-body">@(bior.EmployeeName)</div>
+                                <i class="bi bi-box-arrow-in-down-right position-absolute bottom-0 end-0 m-2"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <div id="@collapseId" class="accordion-collapse collapse overflow-y-scroll w-100" aria-labelledby="@headerId" data-bs-parent="#employeeBios" style="max-height:@(imageMaxWidth)px;float:left;">
+                    <div class="accordion-body">
+                        <p>@bior.EmployeeBio</p>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
