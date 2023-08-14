@@ -1,43 +1,45 @@
 ﻿@using Umbraco.Cms.Core.Models;
 @using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Web.Common;
 
 @inject IPublishedValueFallback PublishedValueFallback
 
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPageSettings>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
     Layout = null;
+    IPageSettings model = null;
 
-    // For projects created after January 2020
-    // Todo there is either a bug in the Umbraco code or I am doing something wrong.
-    // It could be a missing configuration setting.
-    // The Fallback.To(Fallback.Ancestors) is not working.  It is returning null.
-    // var a = Model.ValueFor(x => x.SlideTransition, fallback: Fallback.To(Fallback.Ancestors));
-    // I need to access the PageSettings class which
+    if (typeof(IPageSettings).IsAssignableFrom(Model.GetType()))
+    {
+        model = new PageSettings(Model, PublishedValueFallback);
+    } 
+    else
+    {
+        model = Umbraco.ContentAtRoot().FirstOrDefault().ChildrenOfType("pageSettings").FirstOrDefault() as PageSettings;
+    }
 
-    //var b = Model.ValueFor(x => x., fallback: Fallback.To(Fallback.Ancestors));
+    var topRowLinks = Model.Value (PublishedValueFallback, "topRowLinks", fallback: Fallback.ToAncestors);
 
     @*Location contacts are not working yet, the media picker used to select the node thinks
     it is a media item and not a content node.  Need to figure out how to fix this.
-    May need a custom property editor to handle this.*@
+    May need a custom property editor to handle this.
+    Resolved see employee bios setup for fix*@
 
-    //var siteFooter = Umbraco.ContentAtRoot().FirstOrDefault().ChildrenOfType("siteFooter").FirstOrDefault() as SiteFooter;
-
-    // @(await Component.InvokeAsync("FooterView", new { siteFooter = siteFooter }))
+    // TODO Keeping this as an implementation not in case it is needed
+    //  @(await Component.InvokeAsync("FooterView", new { siteFooter = siteFooter }))
 }
 
 <div class="container-fluid ht-footer px-0" style="float:inline-start;">
-    @if (Model != null)
+    @if (model != null)
     {
         <!--- Top Section Links (Optional) --->
-        if (Model.FooterDisplayTR)
+        if (model.FooterDisplayTR)
         {
             <div class="container-flex ht-footer-navbar py-1 bg-gradient shadow-lg">
                 <div class="container">
                     <ul class="nav justify-content-center">
                         @{
-                            //Model.ValueFor(x => x.PageTitle, fallback: Fallback.To(Fallback.Ancestors, Fallback.DefaultValue), defaultValue: new HtmlString("Default page title"))
-                            //Model.Value()
-                            foreach (var link in Model.TopRowLinks)
+                            foreach (var link in topRowLinks as IEnumerable<Link>)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link" href="@(link.Url)" target="@(link.Target)">@(link.Name)</a>
@@ -52,26 +54,26 @@
             <!--- Middle Row Up To 3 Columns --->
             @{
                 int middleRowColumnsCount = 0;
-                if (Model.FooterDisplayMrlc) middleRowColumnsCount++;
+                if (model.FooterDisplayMrlc) middleRowColumnsCount++;
 
-                if (Model.FooterDisplayMrcc) middleRowColumnsCount++;
+                if (model.FooterDisplayMrcc) middleRowColumnsCount++;
 
-                if (Model.FooterDisplayMrrc) middleRowColumnsCount++;
+                if (model.FooterDisplayMrrc) middleRowColumnsCount++;
             }
             @if (middleRowColumnsCount > 0)
             {
                 <div class="d-block d-md-flex">
 
                     <!--- Left Column --->
-                    @if (Model.FooterDisplayMrlc)
+                    @if (model.FooterDisplayMrlc)
                     {
                         <div class="flex-md-column p-2 bd-highlight col-md-@(middleRowColumnsCount == 3 ? "3" : (12 / middleRowColumnsCount).ToString())">
-                            <h5>@(Model.HeaderTitle) asfaw</h5>
+                            <h5>@(model.HeaderTitle) asfaw</h5>
                         </div>
                     }
 
                     <!--- Middle Column --->
-                    @if (Model.FooterDisplayMrcc)
+                    @if (model.FooterDisplayMrcc)
                     {
                         <div class="flex-md-column text-center p-2 col-md-@(middleRowColumnsCount == 3 ? "6" : (12 / middleRowColumnsCount).ToString())">
                             <ul class="list-group list-unstyled">
@@ -86,7 +88,7 @@
                     }
 
                     <!--- Right Column --->
-                    @if (Model.FooterDisplayMrrc)
+                    @if (model.FooterDisplayMrrc)
                     {
                         <div class="flex-md-column text-end p-2 col-md-@(middleRowColumnsCount == 3 ? "3" : (12 / middleRowColumnsCount).ToString())">
                             <div class="list-inline">
@@ -102,7 +104,7 @@
                 </div>
             }
             <!--- Certifcations Section --->
-            @if (Model.FooterDisplayBadges)
+            @if (model.FooterDisplayBadges)
             {
                 <div class="row text-center footerbadges">
                     @*@foreach (MediaWithCrops badge in model.FooterBadges)
