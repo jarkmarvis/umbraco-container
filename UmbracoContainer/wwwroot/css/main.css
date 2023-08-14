@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+/* ---------- Main Nav ---------- */
+@import url('nav.css');
+
+/* ---------- FOOTER ---------- */
+@import url('footer.css');
+
+/* ---------- Font Styling ---------- */
+@import url('fonts.css');
+
+/* ---------- Custom Features ------- */
+@import url('features.css');
+
 :root {
     --ht-dark-green: #009478;
     --ht-light-green: #93d50a;
@@ -12,172 +25,14 @@
     --ht-font-color-dark: #6d6e71;
 }
 
+
 body {
     font-family: "Nexa-Regular", Arial, 'Helvetica Neue', Helvetica, Tahoma, sans-serif;
     color: var(--ht-font-color-dark);
 }
 
-/* ---------- Header ---------- */
-.ht-navbar {
-    background-color: var(--ht-dark-green) !important;
-    color: var(--ht-light);
-    border-bottom: 8px solid var(--ht-light-green);
-}
-
-.ht-nav-tog {
-    color: var(--ht-light);
-    font-size: 1.45rem;
-    margin-right: 1rem;
-    transition: .2s;
-    border: 2px solid var(--ht-light);
-    width: 3rem;
-    height: 3rem;
-}
-
-    .ht-nav-tog:hover {
-        color: var(--ht-light-grey);
-        border: 3px solid var(--ht-light-grey);
-    }
-
-.nav-link.ht-nav-link-lt {
-    color: var(--ht-light);
-    transition: .2s;
-    font-size: 1.45rem;
-}
-
-    .ht-nav-link-lt:hover {
-        color: var(--ht-hover-dark-green);
-    }
-
-.ht-link a {
-    color: var(--ht-light-green);
-    text-decoration: none;
-}
-
-    .ht-link a:hover {
-        color: var(--ht-hover-dark-green);
-    }
-
-.right-nav-wrapper {
-    display: inherit;
-    justify-content: flex-end;
-}
-
-.navbar-right {
-    align-items: center;
-    color: var(--color-white);
-    display: flex;
-    flex-direction: row;
-    font-family: var(--font-sans-serif);
-    font-size: .875rem;
-    font-weight: 700;
-    padding-right: 16px;
-}
-
-.social-grey {
-    color: var(--ht-very-lt-grey);
-    transition: .2s;
-}
-
-    .social-grey:hover {
-        color: var(--ht-light-grey);
-        transition: .2s;
-    }
-/*
-@media only screen and (min-width: 720px) {
-    a.nav-item.nav-link {
-        padding: 0 0.5em;
-    }
-
-    @media only screen and (min-width: 992px) {
-        a.nav-item.nav-link {
-            padding: 0 0.5em;
-        }
-
-        a nav-item:not(:last-child) .nav-link {
-            border-right: 2px solid #000000;
-        }
-    }
-
-    .nav-item:not(:last-child) .nav-link {
-        border-right: 2px solid #000000;
-    }
-}*/
-
-.hts-header .logo-wrapper img.logo {
-    height: 3.75rem;
-    min-width: 9.375rem;
-    position: relative;
-}
-
-/* ---------- FOOTER ---------- */
-
-.ht-footer {
-    background-color: var(--ht-secondary-blue) !important;
-    border-top: 8px solid var(--ht-light-green);
-}
-.ht-footer-navbar {
-    background-color: var(--ht-dark-green) !important;
-}
-
-.footer h4 {
-    margin-bottom: 20px;
-}
-
-.ht-footer .nav-link {
-    color: var(--ht-light);
-    font-size: 1.25rem;
-    transition: .2s;
-}
-    .ht-footer .nav-link:hover {
-        color: var(--ht-hover-dark-green);
-    }
-
-ul.footer-links {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-    ul.footer-links li {
-        line-height: 32px;
-    }
-
-        ul.footer-links li a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, .7);
-        }
-
-            ul.footer-links li a:hover, ul.footer-links li a:focus {
-                text-decoration: none;
-                color: rgba(255, 255, 255, 1);
-            }
-
-.footer img {
-    width: 30%;
-}
-
-.footer .certs {
-    padding: 1rem;
-}
 
 
-
-/* ----------- TODO: clean up the unused css models below  */
-
-/* ---------- FONTS ---------- */
-
-/** {
-    font-family: 'Lato', Roboto, sans-serif;
-}
-
-h2 {
-    margin-bottom:20px;
-}
-
-p {
-    margin: 0 0 20px;
-}*/
 
 /* ---------- BUTTONS ---------- */
 
@@ -425,95 +280,3 @@ a.featured-link:hover .thumbnail-blog .thumbnail-img {
     height: auto;
 }*/
 
-/* ---------- Style for employee bio listings ---------- */
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    pointer-events: none;
-}
-
-/* Custom popover styles */
-.custom-popover {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    border-radius: 8px;
-    padding: 10px;
-    max-width: 300px;
-    height: 70%;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    transition-delay: 0.1s;
-}
-
-.position-relative:hover .custom-popover {
-    opacity: 1;
-}
-
-.accordion-button::after {
-    background-image: none;
-    width: 0;
-}
-
-.accordion-button:not(.collapsed)::after {
-    background-image: none;
-    width: 0;
-}
-
-.emp-bio-item {
-    max-width: max-content;
-    height: fit-content;
-    display: inline-block;
-    float: none;
-    vertical-align: top;
-    width: 100%;
-}
-
-.emp-bio-detail {
-    max-height: inherit;
-    height: 100%;
-    width: 90%;
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-    .emp-bio-item {
-        display: inline-block;
-        width: 49%;
-    }
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    .emp-bio-item {
-        width: 32%;
-    }
-    .emp-bio-detail {
-        width: 75%;
-    }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    .emp-bio-item {
-        width: 24%;
-    }
-}
-
-/* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-    .emp-bio-item {
-        width: 19%;
-    }
-}
-
-/* XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {
-}
