@@ -22,7 +22,7 @@
 					<div class="col-md-6">
 						<div class="meta-meta text-right">
 							<p><br /> 
-								<span class="font-weight-bold">Published on: </span> @Model.Value("publishedOn").ToString("MMMM dd, yyyy") <br />
+								<span class="font-weight-bold">Published on: </span> @(Model.Value<DateTime>("publishedOn").ToString("MMMM dd, yyyy")) <br />
 								<span class="font-weight-bold">Category:</span> <a href="#">
 								    @if(Model.Categories.Any())
 								    {
