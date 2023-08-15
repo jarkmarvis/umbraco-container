@@ -18,8 +18,6 @@
         model = Umbraco.ContentAtRoot().FirstOrDefault().ChildrenOfType("pageSettings").FirstOrDefault() as PageSettings;
     }
 
-    var topRowLinks = Model.Value (PublishedValueFallback, "topRowLinks", fallback: Fallback.ToAncestors);
-
     @*Location contacts are not working yet, the media picker used to select the node thinks
     it is a media item and not a content node.  Need to figure out how to fix this.
     May need a custom property editor to handle this.
@@ -35,6 +33,7 @@
         <!--- Top Section Links (Optional) --->
         if (model.FooterDisplayTR)
         {
+            var topRowLinks = model.TopRowLinks.Count() > 0 ? model.TopRowLinks : GetPropertyFallback(model.TopRowLinks, nameof(model.TopRowLinks), Model, PublishedValueFallback);
             <div class="container-flex ht-footer-navbar py-1 bg-gradient shadow-lg">
                 <div class="container">
                     <ul class="nav justify-content-center">
@@ -63,7 +62,6 @@
             @if (middleRowColumnsCount > 0)
             {
                 <div class="d-block d-md-flex">
-
                     <!--- Left Column --->
                     @if (model.FooterDisplayMrlc)
                     {
@@ -155,3 +153,10 @@
         </div>
     }
 </div>
+@{
+    static T GetPropertyFallback<T>(T property, string name, IPublishedContent content, IPublishedValueFallback fallback)
+    {
+        var val = content.Value<T>(fallback, name, fallback: Fallback.ToAncestors);
+        return val;
+    }
+}
