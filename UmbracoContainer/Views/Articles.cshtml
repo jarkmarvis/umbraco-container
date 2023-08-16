@@ -1,4 +1,5 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@using System.Linq
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Articles>
 @{
     Layout = "Master.cshtml";
@@ -44,36 +45,64 @@
         </div>
     </div>
 
+    @{
+        Url.ActionContext.HttpContext.Request.Query.TryGetValue("page", out var pageVal);
+        int.TryParse(pageVal, out int page);
+
+        var items = Model.Children<Article>().Where(x => x.IsVisible());
+        int totalItems = items.Count();
+        int itemsPerPage = Model.ItemsPerPage;
+        int totalPages = (int)Math.Ceiling((double)totalItems / itemsPerPage);
+
+        var pageOfItems = items
+        .OrderBy<Article, DateTime>(x => x.PublishedOn)
+        .Skip((page - 1) * itemsPerPage)
+        .Take(itemsPerPage);
+    }
+
     <!-- Latest article posts -->
     <div class="row section">
         <div class="col-md-12">
-            <h3>Latest stories</h3>
+            <h3>Latest Articles</h3>
         </div>
-    </div>
-
-@{
-	var selection = Umbraco.AssignedContentItem.ChildrenOfType("article")
-    .Where(x => x.IsVisible());
-}
-    <!-- Article Post Query goes here. -->
-    <div class="row">
-        @{
-            var selected = selection.\ as IEnumerable<Article>;
-            selection = selected.OrderBy<Article, DateTime>(x => x.PublishedOn);
-        }
-        @foreach (Article item in selection)
-        {
-            <div class="col-md-4">
-                <a href="@item.Url()">
-                    <div class="thumbnail-article">
-                        @if (item.ThumbnailImage != null) {
+        <div class="col-12">
+            @foreach (Article item in pageOfItems)
+            {
+                <div class="row">
+                    <a href="@item.Url()">
+                        @if (item.ThumbnailImage != null)
+                        {
                             <div><img src="@(item.ThumbnailImage.Url())" width="150px" /></div>
                         }
                         <h4>@item.ArticleTitle</h4>
-                        <h4>@item.Author</h4>
-                    </div>
-                </a>
+                    </a>
+                    <h4>@item.Author</h4>
+                </div>
+            }
+            <div class="row">
+                <nav aria-label="Page Navigation">
+                    <ul class="pagination justify-content-center">
+                        @if (totalPages > 1)
+                        {
+                            <li class="page-item @(page == 1 ? "disabled" : "")">
+                                <a class="page-link" href="#@(Url.Link("Articles", new { page = (page - 1 > 0 ? (page - 1).ToString() : "") }))" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                        }
+                        @for (int i = 1; i <= totalPages; i++)
+                        {
+                            <li class="page-item @(i == page ? "active" : "")">
+                                <a class="page-link" href="#@(Url.Link("Articles", new { page = i }))">@i</a>
+                            </li>
+                        })
+                        @if (totalPages > 1)
+                        {
+                            <li class="page-item @(page == totalPages ? "disabled" : "")">
+                                <a class="page-link" href="#@(Url.Link("Articles", new { page = (page + 1) }))">Next</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
             </div>
-        }
+        </div>
     </div>
 </div>
