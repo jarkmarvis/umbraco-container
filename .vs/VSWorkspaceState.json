@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\UmbracoContainer",
+    "\\UmbracoContainer\\Views",
+    "\\UmbracoContainer\\Views\\Partials",
+    "\\UmbracoContainer\\Views\\Partials\\Footer",
+    "\\UmbracoContainer\\Views\\Partials\\Nav"
   ],
-  "SelectedNode": "\\UmbracoContainer.sln",
+  "SelectedNode": "\\UmbracoContainer\\Views\\Articles.cshtml",
   "PreviewInSolutionExplorer": false
 }

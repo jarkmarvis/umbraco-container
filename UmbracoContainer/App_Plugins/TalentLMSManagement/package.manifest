@@ -1,0 +1,9 @@
+{
+    "javascript": [
+        /*javascript files listed here*/
+        "~/App_Plugins/TalentLMSManagement/backoffice/TlmsSettings/tlmsSettings.Controller.js"
+    ],
+    "css": [
+        "~/App_Plugins/TalentLMSManagement/css/1.10.5_font_bootstrap-icons.css"
+    ]
+}

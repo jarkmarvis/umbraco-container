@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title></title>
+</head>
+<body>
+    <div ng-controller="tlmsSettings.Controller as vm">
+
+        <form name="mySectionForm" novalidate>
+
+            <umb-editor-view>
+
+                <umb-editor-header name="vm.content.name"
+                                   name-locked="true"
+                                   hide-alias="true"
+                                   hide-description="true"
+                                   hide-icon="false"
+                                   icon="icon-school">
+                    <!--name="{string}"
+                    [name-required="{boolean}"]
+                    [tabs="{array}"]
+                    [navigation="{array}"]
+                    [name-locked="{boolean}"]
+                    [name-max-length="{number}"]
+                    [menu="{object}"]
+                    [icon="{string}"]
+                    [hide-icon="{boolean}"]
+                    [alias="{string}"]
+                    [alias-locked="{boolean}"]
+                    [hide-alias="{boolean}"]
+                    [description="{string}"]
+                    [description-locked="{boolean}"]
+                    [hide-description="{boolean}"]
+                    [setpagetitle="{boolean}"]
+                    [editorfor="{string}"]
+                    [loading="{boolean}"]-->
+                </umb-editor-header>
+
+                <umb-editor-container>
+                    Main Content
+                </umb-editor-container>
+
+                <umb-editor-footer>
+                    <umb-editor-footer-content-right>
+                        <i class="bi bi-pc-display-horizontal"></i> right footer content here 
+                    </umb-editor-footer-content-right>
+                    
+                </umb-editor-footer>
+
+            </umb-editor-view>
+
+        </form>
+
+    </div>
+</body>
+</html>
